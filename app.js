@@ -4,7 +4,7 @@ var request = require('request');
 var fs = require('fs');
 var exec = require('child_process').exec;
 var pinterestAPI = require('pinterest-api');
-const PORT = process.env.PORT
+var PORT = process.env.PORT || 8080;
 
 var download = function(url,filename,callback){
 	request.head(url,function(err,res,body){
