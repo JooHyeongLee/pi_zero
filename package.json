@@ -26,6 +26,7 @@
     "forever": "^0.15.3",
     "pinterest-api": "^1.1.4",
     "request": "^2.88.0",
+    "response": "^0.18.0",
     "supervisor": "^0.12.0"
   }
 }
