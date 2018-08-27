@@ -21,13 +21,12 @@ function getUrlFunction(p_id,callback) {
 			secret = res.body.photo.secret;
 			urls.push('https://farm'+farm_id+'.staticflickr.com/'+server_id+'/'+id+'_'+secret+'.jpg');
 			names.push(id);
-			})
-		 setTimeout(function(){
+		}).then(function(){
 			singleton.url = urls;
 			singleton.count = res1.body.photos.total;
 			singleton.name = names;
 			callback(singleton);
-		},2500);
+		})
 	}).catch(function(err){
 		console.log(err);
 	});

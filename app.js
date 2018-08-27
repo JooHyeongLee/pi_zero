@@ -22,18 +22,6 @@ var fileNum = require('./fileNum');
 app.get('/home',function(req,res){
 	res.send('home');
 });
-app.get('/refresh',function(req,res,next){
-	var refresh = exec('sh refresh.sh',function(err,stdout,stderr){
-		console.log(err);
-	});
-	res.send('refresh');
-});
-app.get('/show',function(req,res){
-	var run = exec('sh show.sh',function(err,stdout,stderr){
-		console.log(err);
-	});
-	res.send('show');
-});
 app.get('/exit',function(req,res){
 	var run = exec('sh kill.sh',function(err,stdout,stderr){
 		console.log(err);
@@ -61,13 +49,12 @@ app.listen(3000,function(){
 				if(localFile.length>flickrFile.length){
 					localFile.forEach(function(element) {
 						if(flickrFile.indexOf(element)==-1){
-							fs.unlink('./img/'+element,function(error){
+							fs.unlink('./img/'+element,function(err){if(err) throw err;});
 							getUrl.getUrlFunction(element,function(){
 								download.downloadFunction(singleton.url[0],singleton.name[0],response,function(){
-								console.log('done');
+									console.log('done');
 								});
 							});
-							}
 						}
 					});
 				}
@@ -75,12 +62,10 @@ app.listen(3000,function(){
 				else {
 					flickrFile.forEach(function(element) {
 						if(localFile.indexOf(element)==-1){
-							fs.unlink('./img/'+element,function(error){
 								getUrl.getUrlFunction(element,function(){
 								download.downloadFunction(singleton.url[0],singleton.name[0],response,function(){
-								console.log('done');
+									console.log('done');
 								});
-							});
 							});
 						}
 					});
@@ -94,6 +79,7 @@ app.listen(3000,function(){
 		console.error(err);
 	});
 	},2000);
+	var run = exec('sh show.sh',function(err,stdout,stderr){console.log(err);});
 });
 
 
