@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var request = require('request');
 var response = require('response');
+var date = require('date-utils');
 var fs = require('fs');
 var exec = require('child_process').exec;
 var Flickr = require('flickr-sdk');
@@ -14,6 +15,8 @@ var oauth = new Flickr.OAuth(
 var singleton = require('./function/singleton');
 //flickr 감시
 var watch = require('./function/watch');
+//시간별 작업
+var timeOp = require('./function/timeOperation');
 //flickr gallery
 var gallery = require('./function/gallery');
 var myPhoto = require('./function/myPhoto');
@@ -21,6 +24,11 @@ var myPhoto = require('./function/myPhoto');
 app.get('/gallery',function(req,res){
 	res.send('home');
 	gallery.galleryFunction();
+	var run = exec('sh gallery_show.sh',function(err,stdout,stderr){
+		if(err) throw err;
+		else
+			var run = exec('sh kill.sh',function(err,stdout,stderr){});
+	});
 });
 app.get('/exit',function(req,res){
 	var run = exec('sh kill.sh',function(err,stdout,stderr){
@@ -28,13 +36,23 @@ app.get('/exit',function(req,res){
 	});
 	res.send('exit');
 });
-app.get('/show',function(req,res){
-	var run = exec('sh show.sh',function(err,stdout,stderr){console.log(err);});
+app.get('/',function(req,res){
+	var run = exec('sh show.sh',function(err,stdout,stderr){
+		if(err){}
+		else
+			var run = exec('sh kill.sh',function(err,stdout,stderr){});
+	});
 });
 
 app.listen(3000,function(){
+	setInterval(function(){
+		var newDate = new Date();
+		var time = newDate.toFormat('YYYY-MM-DD HH24:MI:SS');
+		timeOp.timeOperationFunction(time);
+	},1000);
 	console.log('server connected');
 	watch.watchFunction();
+	var run = exec('sh show.sh',function(err,stdout,stderr){});
 });
 
 

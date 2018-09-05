@@ -51,6 +51,5 @@ function watchFunction() {
 		console.error(err);
 	});
 	},3000);
-	var run = exec('sh show.sh',function(err,stdout,stderr){console.log(err);});
 }
 exports.watchFunction = watchFunction;
