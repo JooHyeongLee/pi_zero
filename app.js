@@ -5,6 +5,8 @@ var response = require('response');
 var date = require('date-utils');
 var fs = require('fs');
 var exec = require('child_process').exec;
+app.set('view engine','pug');
+app.set('views','./views');
 var Flickr = require('flickr-sdk');
 var flickr = new Flickr('5c2e4d0d734ed64210332e42ccc0814c');
 var oauth = new Flickr.OAuth(
@@ -25,11 +27,20 @@ app.get('/gallery',function(req,res){
 	res.send('home');
 	gallery.galleryFunction();
 	var run = exec('sh gallery_show.sh',function(err,stdout,stderr){
-		if(err) throw err;
+		if(err) {}
 		else
 			var run = exec('sh kill.sh',function(err,stdout,stderr){});
 	});
 });
+app.get('/weather',function(req,res){
+	res.send('weather');
+	var run = exec("chromium-browser --app=http://localhost:3000/forecast -start-fullscreen",function(err,stdout,stderr){});
+});
+app.get('/forecast',function(req,res){
+	var url = 'https://farm6.staticflickr.com/5045/5294436653_2fca5b8a14.jpg';
+	res.render('forecast',{data:JSON.stringify(url)});
+});
+
 app.get('/exit',function(req,res){
 	var run = exec('sh kill.sh',function(err,stdout,stderr){
 		console.log(err);

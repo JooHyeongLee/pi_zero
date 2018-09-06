@@ -11,7 +11,7 @@ function timeOperationFunction(time){
 	if(hour =='17') {
 		request(url,function(err,response,body){
 			if(err)
-				console.log('error:',error);
+				console.log(err);
 			else {
 				var obj = JSON.parse(body);
 				console.log('현재 기온: '+obj.main.temp);

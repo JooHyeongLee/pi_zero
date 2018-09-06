@@ -12,6 +12,7 @@ function galleryFunction() {
 		//현재 갤러리 페이지에 있는 사진 개수만큼 반복
 		res.body.photos.photo.forEach(function(element){
 			var url ='https://farm'+element.farm+'.staticflickr.com/'+element.server+'/'+element.id+'_'+element.secret+'.jpg'
+			console.log(url)
 			download.downloadFunction(path,url,element.id,response,function(){ console.log('done')});
 		});
 	})
