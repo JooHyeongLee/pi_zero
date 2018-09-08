@@ -1,18 +1,25 @@
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser');
 var request = require('request');
 var response = require('response');
 var date = require('date-utils');
 var fs = require('fs');
 var exec = require('child_process').exec;
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 app.set('view engine','pug');
 app.set('views','./views');
+app.use(express.static(__dirname));
 var Flickr = require('flickr-sdk');
 var flickr = new Flickr('5c2e4d0d734ed64210332e42ccc0814c');
 var oauth = new Flickr.OAuth(
 	'5c2e4d0d734ed64210332e42ccc0814c',
 	'23db734b8dd1b2e6'
 );
+//시스템 시간
+var newDate;
+var time;
 //singleton 패턴
 var singleton = require('./function/singleton');
 //flickr 감시
@@ -22,6 +29,8 @@ var timeOp = require('./function/timeOperation');
 //flickr gallery
 var gallery = require('./function/gallery');
 var myPhoto = require('./function/myPhoto');
+//날씨 정보
+var weather = require('./function/weather');
 
 app.get('/gallery',function(req,res){
 	res.send('home');
@@ -37,10 +46,13 @@ app.get('/weather',function(req,res){
 	var run = exec("chromium-browser --app=http://localhost:3000/forecast -start-fullscreen",function(err,stdout,stderr){});
 });
 app.get('/forecast',function(req,res){
-	var url = 'https://farm6.staticflickr.com/5045/5294436653_2fca5b8a14.jpg';
-	res.render('forecast',{data:JSON.stringify(url)});
+	weather.weatherFunction(function(data){
+		res.render('forecast',{data:JSON.stringify(data)});
+	})
 });
-
+app.post('/forecast_receive',function(req,res){
+	weather.weatherFunction(res);
+});
 app.get('/exit',function(req,res){
 	var run = exec('sh kill.sh',function(err,stdout,stderr){
 		console.log(err);
@@ -57,15 +69,14 @@ app.get('/',function(req,res){
 
 app.listen(3000,function(){
 	setInterval(function(){
-		var newDate = new Date();
-		var time = newDate.toFormat('YYYY-MM-DD HH24:MI:SS');
+		newDate = new Date();
+		time = newDate.toFormat('YYYY-MM-DD HH24:MI:SS');
 		timeOp.timeOperationFunction(time);
 	},1000);
 	console.log('server connected');
 	watch.watchFunction();
 	var run = exec('sh show.sh',function(err,stdout,stderr){});
 });
-
 
 Array.prototype.compare = function(array) {
   array.sort();

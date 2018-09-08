@@ -1,18 +1,16 @@
-style.
-	html,body{
-		margin:0;
-		height:100%;
-	}
-	img{
-		display:block;
-		width:100%; height:100%;
-		object-fit: cover;
-	}
 doctype html
+link#forecast-css(href='css/forecast.css', rel='stylesheet')
 head
 	meta(chatset='utf8')
+	script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
 body
-	img#image(src='' align='center')
+	div(class="container")
+		img#image(src='' alt="weather")
+		div#tmp(class="centered") 
 script.
-	var val = !{data}
-	document.getElementById('image').src = val;
+	$(document).ready(function() {
+		var data = !{data}	
+		document.getElementById('image').src = data.img
+		tmp.innerHTML = data.temp +'도'
+	});
+

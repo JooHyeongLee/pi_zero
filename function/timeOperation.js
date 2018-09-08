@@ -3,16 +3,19 @@ var city = 'seoul';
 var url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
 var request = require('request');
 var response = require('response');
+var flag = true;
 
 function timeOperationFunction(time){
 	var hour = time.substring(11,13);
 	var minute= time.substring(14,16);
+	var second = time.substring(17,19);
 
-	if(hour =='17') {
+	if(hour =='15') {
 		request(url,function(err,response,body){
 			if(err)
 				console.log(err);
-			else {
+			else if(flag){
+				flag = false;
 				var obj = JSON.parse(body);
 				console.log('현재 기온: '+obj.main.temp);
 			}
