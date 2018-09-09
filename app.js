@@ -22,6 +22,8 @@ var newDate;
 var time;
 //singleton 패턴
 var singleton = require('./function/singleton');
+//search 기능
+var search = require('./function/search');
 //flickr 감시
 var watch = require('./function/watch');
 //시간별 작업
@@ -33,7 +35,7 @@ var myPhoto = require('./function/myPhoto');
 var weather = require('./function/weather');
 
 app.get('/gallery',function(req,res){
-	res.send('home');
+	res.send('gallery');
 	gallery.galleryFunction();
 	var run = exec('sh gallery_show.sh',function(err,stdout,stderr){
 		if(err) {}
@@ -41,17 +43,24 @@ app.get('/gallery',function(req,res){
 			var run = exec('sh kill.sh',function(err,stdout,stderr){});
 	});
 });
-app.get('/weather',function(req,res){
-	res.send('weather');
-	var run = exec("chromium-browser --app=http://localhost:3000/forecast -start-fullscreen",function(err,stdout,stderr){});
-});
 app.get('/forecast',function(req,res){
+	console.log('get');
 	weather.weatherFunction(function(data){
 		res.render('forecast',{data:JSON.stringify(data)});
 	})
 });
-app.post('/forecast_receive',function(req,res){
-	weather.weatherFunction(res);
+app.post('/search_post',function(req,res) {
+	search.searchFunction(req.body.postData);
+	var inputData;
+	req.on('data',function(data) {
+		inputData = JSON.parse(data);
+		console.log(data)
+	});
+	req.on('end',function() {
+		console.log(inputData.postData);
+	});
+	res.write("OK!");
+	res.end();
 });
 app.get('/exit',function(req,res){
 	var run = exec('sh kill.sh',function(err,stdout,stderr){

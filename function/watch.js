@@ -44,8 +44,9 @@ function watchFunction() {
 				})
 			}
 		}
-		else
-			console.log('local과 flickr 일치함');
+		else{
+			//console.log('local과 flickr 일치함');
+		}
 			});
 	}).catch(function(err){
 		console.error(err);

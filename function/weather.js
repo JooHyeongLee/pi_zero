@@ -9,9 +9,13 @@ function weatherFunction(callback) {
 		if(err)
 			console.log(err);
 		else {
-			var obj = JSON.parse(body);
-			var weatherObj = {"img":"rain.gif", "temp":obj.main.temp};
-			//res.json(weatherObj)
+			obj = JSON.parse(body);
+			if(obj.weather[0].main=='Clear')
+				weatherObj = {"img":"weather_img/sunny", "temp":obj.main.temp, "status":obj.weather[0].main};
+			else if(obj.weather[0].main == 'Clouds')
+				weatherObj = {"img":"weather_img/sunny", "temp":obj.main.temp, "status":obj.weather[0].main};
+			else if(obj.weather[0].main == 'Rain')
+				weatherObj = {"img":"weather_img/rain.gif", "temp":obj.main.temp, "status":obj.weather[0].main};
 			callback(weatherObj)
 		}
 	});

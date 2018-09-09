@@ -6,11 +6,13 @@ head
 body
 	div(class="container")
 		img#image(src='' alt="weather")
+		div#condition(class="condition")
 		div#tmp(class="centered") 
 script.
 	$(document).ready(function() {
 		var data = !{data}	
 		document.getElementById('image').src = data.img
 		tmp.innerHTML = data.temp +'도'
+		condition.innerHTML = data.status
 	});
 
