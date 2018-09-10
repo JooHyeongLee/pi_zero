@@ -1,18 +1,22 @@
 doctype html
 link#forecast-css(href='css/forecast.css', rel='stylesheet')
 head
-	meta(chatset='utf8')
-	script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+    meta(chatset='utf8')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
 body
-	div(class="container")
-		img#image(src='' alt="weather")
-		div#condition(class="condition")
-		div#tmp(class="centered") 
+    div(class="container")
+        img#image(src='' alt='weather')
+        div#condition(class="condition")
+        div#tmp(class="centered") 
+        div#temp_max(class="temp_max") 최고온도 : 
+        div#temp_min(class="temp_min") 최저온도 : 
 script.
-	$(document).ready(function() {
-		var data = !{data}	
-		document.getElementById('image').src = data.img
-		tmp.innerHTML = data.temp +'도'
-		condition.innerHTML = data.status
-	});
+    $(document).ready(function() {
+        var data = !{data}	
+        document.getElementById('image').src = data.img
+        tmp.innerHTML = data.temp +'도'
+        condition.innerHTML = data.status  
+        temp_max.innerHTML += data.temp_max +'도'
+        temp_min.innerHTML += data.temp_min +'도'
+    });
 

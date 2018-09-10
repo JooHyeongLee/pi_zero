@@ -39,7 +39,7 @@ function watchFunction() {
 				})
 				localFile.forEach(function(element){
 					if(flickrFile.indexOf(element)==-1) {
-						fs.unlink(path+element,function(err){if(err) throw err; else console.log('done')});
+						fs.unlink(path+element,function(err){if(err) throw err; else console.log('delete!')});
 					}
 				})
 			}

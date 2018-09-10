@@ -11,11 +11,38 @@ function weatherFunction(callback) {
 		else {
 			obj = JSON.parse(body);
 			if(obj.weather[0].main=='Clear')
-				weatherObj = {"img":"weather_img/sunny", "temp":obj.main.temp, "status":obj.weather[0].main};
+				weatherObj = {
+                "img":"weather_img/clear.png", 
+                "temp":obj.main.temp, 
+                "status":"맑음",
+                "temp_max" : obj.main.temp_max,
+                "temp_min" : obj.main.temp_min
+                };
 			else if(obj.weather[0].main == 'Clouds')
-				weatherObj = {"img":"weather_img/sunny", "temp":obj.main.temp, "status":obj.weather[0].main};
+				weatherObj = {
+                "img":"weather_img/cloudy.png", 
+                "temp":obj.main.temp, 
+                "status":"구름 조금",
+                "temp_max" : obj.main.temp_max,
+                "temp_min" : obj.main.temp_min
+                };
 			else if(obj.weather[0].main == 'Rain')
-				weatherObj = {"img":"weather_img/rain.gif", "temp":obj.main.temp, "status":obj.weather[0].main};
+				weatherObj = {
+                "img":"weather_img/rain.png",
+                "temp":obj.main.temp, 
+                "status":"비",
+                "temp_max" : obj.main.temp_max,
+                "temp_min" : obj.main.temp_min
+                };
+            else{
+				weatherObj = {
+                "img":"weather_img/unknown.png",
+                "temp":obj.main.temp, 
+                "status":"알수없음",
+                "temp_max" : obj.main.temp_max,
+                "temp_min" : obj.main.temp_min
+                };
+            }
 			callback(weatherObj)
 		}
 	});

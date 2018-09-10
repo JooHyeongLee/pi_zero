@@ -1,36 +1,18 @@
 /* Container holding the image and the text */
 .container {
+    font-size:50px;
     position: relative;
 	text-align: center;
-	color: white;
-	}
+    color:white;
+    /* The image used */
+    background-image: linear-gradient(#07D2CC, #304352);
+    /* Full height */
+    height: 100%; 
 
-/* Bottom left text */
-.bottom-left {
-	position: absolute;
-	bottom: 8px;
-	left: 16px;
-	}
-
-/* Top left text */
-.top-left {
-	position: absolute;
-	top: 8px;
-	left: 16px;
-	}
-
-/* Top right text */
-.top-right {
-	position: absolute;
-	top: 8px;
-	right: 16px;
-	}
-
-/* Bottom right text */
-.bottom-right {
-	position: absolute;
-	bottom: 8px;
-	right: 16px;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 	}
 
 /* Centered text */
@@ -48,8 +30,31 @@
 	font-size:50px;
 	transform: translate(-50%,-50%);
 	}
+.temp_max {
+    position: absolute;
+    top:60%;
+    left:50%;
+    font-size:50xp;
+    transform: translate(-50%,-50%);
+    }
+.temp_min{
+    position: absolute;
+    top:70%;
+    left:50%;
+    font-size:50px;
+    transform: translate(-50%,-50%);
+    }
 img {
-	display:block;
-	width:100%; height:100%;
-	object-fit: cover;
+    position: absolute;
+    top:28%;
+    margin-left:auto;
+    margin-right:auto;
+    height:23%;
+    width:23%;
+    transform: translate(-50%,-50%);
 }
+body, html {
+    height: 100%;
+    margin: 0;
+}
+

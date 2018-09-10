@@ -11,7 +11,7 @@ function timeOperationFunction(time){
 	var minute= time.substring(14,16);
 	var second = time.substring(17,19);
 
-	if(hour =='16') {
+	if(hour =='20') {
 		request(url,function(err,response,body){
 			if(err)
 				console.log(err);
