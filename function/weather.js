@@ -18,38 +18,63 @@ function weatherFunction(callback) {
 		if(err)
 			console.log(err);
 		else {
-			obj = JSON.parse(body);
+            //요일 구하기
+            var week = new Array('SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY');
+			var today = new Date().getDay();
+            var todayLabel = week[today];
+            //년월일 구하기
+            var newDate = new Date();
+            var time = newDate.toFormat('YYYY/MM/DD');
+            obj = JSON.parse(body);
 			if(obj.weather[0].main=='Clear')
 				weatherObj = {
                 "img":"weather_img/clear.png", 
                 "temp":Math.round(obj.main.temp), 
                 "status":"맑음",
-                "temp_max" : obj.main.temp_max,
-                "temp_min" : obj.main.temp_min
+                "week" : todayLabel,
+                "date" : time,
+                "wind" : obj.wind.speed,
+                "humidity" : obj.main.humidity
                 };
 			else if(obj.weather[0].main == 'Clouds')
 				weatherObj = {
                 "img":"weather_img/cloudy.png", 
                 "temp":Math.round(obj.main.temp), 
                 "status":"구름 조금",
-                "temp_max" : obj.main.temp_max,
-                "temp_min" : obj.main.temp_min
+                "week" : todayLabel,
+                "date" : time,
+                "wind" : obj.wind.speed,
+                "humidity" : obj.main.humidity
                 };
 			else if(obj.weather[0].main == 'Rain')
 				weatherObj = {
                 "img":"weather_img/rain.png",
                 "temp":Math.round(obj.main.temp), 
                 "status":"비",
-                "temp_max" : obj.main.temp_max,
-                "temp_min" : obj.main.temp_min
+                "week": todayLabel,
+                "date" : time,
+                "wind" : obj.wind.speed,
+                "humidity" : obj.main.humidity
                 };
+            else if(obj.weather[0].main == 'Mist')
+                weatherObj = {
+                "img":"weather_img/hazy.png",
+                "temp":Math.round(obj.main.temp), 
+                "status":"안개",
+                "week": todayLabel,
+                "date" : time,
+                "wind" : obj.wind.speed,
+                "humidity" : obj.main.humidity
+                }
             else{
 				weatherObj = {
                 "img":"weather_img/unknown.png",
-                "temp":obj.main.temp, 
-                "status":"알수없음",
-                "temp_max" : obj.main.temp_max,
-                "temp_min" : obj.main.temp_min
+                "temp":Math.round(obj.main.temp), 
+                "status":obj.weather[0].main,
+                "week": todayLabel,
+                "date" : time,
+                "wind" : obj.wind.speed,
+                "humidity" : obj.main.humidity
                 };
             }
 			callback(weatherObj)

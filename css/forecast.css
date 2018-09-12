@@ -1,56 +1,69 @@
 /* Container holding the image and the text */
 .container {
-    position: relative;
+    position: absolute;
 	text-align: center;
     color:white;
     /* The image used */
     background-image: linear-gradient(#07D2CC, #304352);
     /* Full height */
     height: 100%; 
+    width: 100%;
     /* Center and scale the image nicely */
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-	}
-
-/* Centered text */
+}
+/* Weather Data */
 .condition {
+    position: relative;
     font-size: 30pt;
-	position: absolute;
-	top:41%;
-	left:50%;
-	transform: translate(-50%,-50%);
-	}
+    top:18%;
+    left:4%;
+    }
 .temp {
-	position: absolute;
-	top: 20%;
-	left: 60%;
-	transform: translate(-50%, -50%);
-    font-size: 100pt;
+	position: relative;
+    left:36%;
+    font-size: 110pt;
     font-weight:bold;
-    transform: scale(.6,1);
+    transform: scale(.5,1);
 	}
-.temp_max {
+.week{
+    position: relative;
+    font-size:30pt;
+    left:-35%;
+    top:18%;
+}
+.date{
+    position:relative;
+    font-size:30pt;
+    left:-35%; 
+    top:21%;
+}
+.wind{
+    position:relative;
+    font-size:23pt;
+    left:-35%;
+    top:-29%;
+}
+.humidity{
+    position:relative;
+    font-size:23pt;
+    left:-36%;
+    top:-25%;
+}
+.humidity_icon{
+    position:absolute;
+    left: 5%;
+    top: 64%;
+    width: 30px;
+    height: 30px;
+}
+.icon {
     position: absolute;
-    top:46%;
-    left:50%;
-    transform: translate(-50%,-50%);
-    }
-.temp_min{
-    position: absolute;
-    top:53%;
-    left:50%;
-    transform: translate(-50%,-50%);
-    }
-img {
-    position: absolute;
-    top:44%;
-    left:50%;
-    margin-left:auto;
-    margin-right:auto;
-    height:100%;
-    width:37%;
-    transform: translate(-50%,-50%);
+    left:34%;
+    top:-7%;
+    height:420px;
+    width:300px;
 }
 body, html {
     height: 100%;
