@@ -4,19 +4,19 @@ head
     meta(chatset='utf8')
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
 body
-    div(class="container")
-        img#image(src='' alt='weather')
-        div#condition(class="condition")
-        div#tmp(class="centered") 
-        div#temp_max(class="temp_max") 최고온도 : 
-        div#temp_min(class="temp_min") 최저온도 : 
+    div#container(class="container")
+        p#rcorners 
+            img#image(src='' alt='weather')
+            div#condition(class="condition")
+            div#tmp(class="temp")
+            div#day(class="day")
+            div#date(class="date")
+        p#rcorners2
 script.
     $(document).ready(function() {
         var data = !{data}	
         document.getElementById('image').src = data.img
-        tmp.innerHTML = data.temp +'도'
-        condition.innerHTML = data.status  
-        temp_max.innerHTML += data.temp_max +'도'
-        temp_min.innerHTML += data.temp_min +'도'
+        tmp.innerHTML += data.temp +'℃'
+        condition.innerHTML = data.status
     });
 
