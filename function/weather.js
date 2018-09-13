@@ -6,14 +6,6 @@ var request = require('request');
 var response = require('response');
 
 function weatherFunction(callback) {
-    request(url2,function(err,response,body) {
-            if(err)
-                console.log(err)
-            else{
-                obj = JSON.parse(body);
-                console.log(obj.list[0].weather)
-            }
-          })
 	request(url,function(err,response,body) {
 		if(err)
 			console.log(err);
@@ -28,7 +20,7 @@ function weatherFunction(callback) {
             obj = JSON.parse(body);
 			if(obj.weather[0].main=='Clear')
 				weatherObj = {
-                "img":"weather_img/clear.png", 
+                "img":"weather_img/Clear.png", 
                 "temp":Math.round(obj.main.temp), 
                 "status":"맑음",
                 "week" : todayLabel,
@@ -38,7 +30,7 @@ function weatherFunction(callback) {
                 };
 			else if(obj.weather[0].main == 'Clouds')
 				weatherObj = {
-                "img":"weather_img/cloudy.png", 
+                "img":"weather_img/Clouds.png", 
                 "temp":Math.round(obj.main.temp), 
                 "status":"구름 조금",
                 "week" : todayLabel,
@@ -48,7 +40,7 @@ function weatherFunction(callback) {
                 };
 			else if(obj.weather[0].main == 'Rain')
 				weatherObj = {
-                "img":"weather_img/rain.png",
+                "img":"weather_img/Rain.png",
                 "temp":Math.round(obj.main.temp), 
                 "status":"비",
                 "week": todayLabel,
@@ -58,7 +50,7 @@ function weatherFunction(callback) {
                 };
             else if(obj.weather[0].main == 'Mist')
                 weatherObj = {
-                "img":"weather_img/hazy.png",
+                "img":"weather_img/Mist.png",
                 "temp":Math.round(obj.main.temp), 
                 "status":"안개",
                 "week": todayLabel,

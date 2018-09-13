@@ -65,6 +65,17 @@
     height:420px;
     width:300px;
 }
+.hourly_icon{
+    position: relative;
+    width:100px;
+    height:100px;
+    padding:15px 0px 13px 13px;
+}
+.hourly{
+    position:relative;
+    font-size:14px;
+    display:inline;
+}
 body, html {
     height: 100%;
     margin: 0;

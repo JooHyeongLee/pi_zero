@@ -15,6 +15,10 @@ body
             img#humidity_icon(src="weather_img/humidity.png" alt='humi' class="humidity_icon")
             div#humidity(class="humidity")
         div#rcorners2
+            -for(var i=0;i<6;i++)
+                div(id='time'+i class='hourly') 
+            -for(var i=0;i<6;i++)
+                img(id='hourly_icon'+(i+1) src='' class='hourly_icon' alt='hourly')
 script.
     $(document).ready(function() {
         var data = !{data}	
@@ -25,5 +29,11 @@ script.
         date.innerHTML = data.date
         wind.innerHTML += 'Wind '+data.wind+'km/h'
         humidity.innerHTML += data.humidity+'%' 
-    });
+        
+        var hourly = !{hourly}
+        for(var i=0;i<6;i++){ 
+            document.getElementById('hourly_icon'+(i+1)).src = 'weather_img/'+hourly.list[i].weather[0].main+'.png'
+            document.getElementById('time'+i).innerHTML = hourly.list[i].dt_txt
+            }
+        });
 

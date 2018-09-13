@@ -33,6 +33,7 @@ var gallery = require('./function/gallery');
 var myPhoto = require('./function/myPhoto');
 //날씨 정보
 var weather = require('./function/weather');
+var hourlyWeather = require('./function/hourlyWeather');
 
 app.get('/gallery',function(req,res){
 	res.send('gallery');
@@ -45,12 +46,20 @@ app.get('/gallery',function(req,res){
 });
 app.get('/forecast',function(req,res){
 	console.log('get');
-	weather.weatherFunction(function(data){
-		res.render('forecast',{data:JSON.stringify(data)});
-	})
+    hourlyWeather.hourlyWeatherFunction(function(hourly) {
+        weather.weatherFunction(function(data){
+            res.render('forecast',{data:JSON.stringify(data), hourly:JSON.stringify(hourly)});
+        })
+   });
+
 });
 app.post('/search_post',function(req,res) {
-	search.searchFunction(req.body.postData);
+	search.searchFunction(req.body.postData)
+	var run = exec('sh search_show.sh',function(err,stdout,stderr){
+		if(err) {}
+		else
+			var run = exec('sh kill.sh',function(err,stdout,stderr){});
+        });
 	var inputData;
 	req.on('data',function(data) {
 		inputData = JSON.parse(data);
