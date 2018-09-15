@@ -1,7 +1,6 @@
 var API_KEY = 'b29c6a6ca12d0a681e4f0f4e92b372b3';
 var city = 'seoul';
 var url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
-var url2 = `http://api.openweathermap.org/data/2.5/forecast?id=1835848&appid=${API_KEY}&units=metric`
 var request = require('request');
 var response = require('response');
 
@@ -26,7 +25,9 @@ function weatherFunction(callback) {
                 "week" : todayLabel,
                 "date" : time,
                 "wind" : obj.wind.speed,
-                "humidity" : obj.main.humidity
+                "humidity" : obj.main.humidity,
+                "temp_max":Math.round(obj.main.temp_max),
+                "temp_min":Math.round(obj.main.temp_min)
                 };
 			else if(obj.weather[0].main == 'Clouds')
 				weatherObj = {
@@ -36,7 +37,9 @@ function weatherFunction(callback) {
                 "week" : todayLabel,
                 "date" : time,
                 "wind" : obj.wind.speed,
-                "humidity" : obj.main.humidity
+                "humidity" : obj.main.humidity,
+                "temp_max":Math.round(obj.main.temp_max),
+                "temp_min":Math.round(obj.main.temp_min)
                 };
 			else if(obj.weather[0].main == 'Rain')
 				weatherObj = {
@@ -46,7 +49,9 @@ function weatherFunction(callback) {
                 "week": todayLabel,
                 "date" : time,
                 "wind" : obj.wind.speed,
-                "humidity" : obj.main.humidity
+                "humidity" : obj.main.humidity,
+                "temp_max":Math.round(obj.main.temp_max),
+                "temp_min":Math.round(obj.main.temp_min)
                 };
             else if(obj.weather[0].main == 'Mist')
                 weatherObj = {
@@ -56,7 +61,21 @@ function weatherFunction(callback) {
                 "week": todayLabel,
                 "date" : time,
                 "wind" : obj.wind.speed,
-                "humidity" : obj.main.humidity
+                "humidity" : obj.main.humidity,
+                "temp_max":Math.round(obj.main.temp_max),
+                "temp_min":Math.round(obj.main.temp_min)
+                }
+            else if(obj.weather[0].main == 'Drizzle')
+                weatherObj = {
+                "img":"weather_img/Drizzle.png",
+                "temp":Math.round(obj.main.temp), 
+                "status":"이슬비",
+                "week": todayLabel,
+                "date" : time,
+                "wind" : obj.wind.speed,
+                "humidity" : obj.main.humidity,
+                "temp_max":Math.round(obj.main.temp_max),
+                "temp_min":Math.round(obj.main.temp_min)
                 }
             else{
 				weatherObj = {
@@ -66,7 +85,9 @@ function weatherFunction(callback) {
                 "week": todayLabel,
                 "date" : time,
                 "wind" : obj.wind.speed,
-                "humidity" : obj.main.humidity
+                "humidity" : obj.main.humidity,
+                "temp_max":Math.round(obj.main.temp_max),
+                "temp_min":Math.round(obj.main.temp_min)
                 };
             }
 			callback(weatherObj)

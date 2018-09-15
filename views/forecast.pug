@@ -8,17 +8,22 @@ body
         div#rcorners 
             div#week(class="week")
             div#date(class="date")
-            div#tmp(class="temp")
-            div#condition(class="condition")
             div#wind(class="wind")
-            img#image(src='' alt='weather' class="icon")
             img#humidity_icon(src="weather_img/humidity.png" alt='humi' class="humidity_icon")
             div#humidity(class="humidity")
+            div#tmp(class="temp")
+            img#image(src='' alt='weather' class="icon")
+            div#condition(class="condition")
+            div#temp_max(class="temp_max") 
+            div#temp_min(class="temp_min") 
         div#rcorners2
-            -for(var i=0;i<6;i++)
-                div(id='time'+i class='hourly') 
-            -for(var i=0;i<6;i++)
-                img(id='hourly_icon'+(i+1) src='' class='hourly_icon' alt='hourly')
+            div(style="text-align:center; margin-top:1.2em;")
+                -for(var i=0;i<7;i++)
+                    div(id='time'+i class='hourly') 
+                -for(var i=0;i<7;i++)
+                    img(id='hourly_icon'+i src='' class='hourly_icon' alt='hourly')
+                -for(var i=0;i<7;i++)
+                    div(id='hourly_temp'+i class='hourly_temp')
 script.
     $(document).ready(function() {
         var data = !{data}	
@@ -29,11 +34,14 @@ script.
         date.innerHTML = data.date
         wind.innerHTML += 'Wind '+data.wind+'km/h'
         humidity.innerHTML += data.humidity+'%' 
-        
+        temp_max.innerHTML = data.temp_max+'℃'
+        temp_min.innerHTML = data.temp_min+'℃ /'
+
         var hourly = !{hourly}
-        for(var i=0;i<6;i++){ 
-            document.getElementById('hourly_icon'+(i+1)).src = 'weather_img/'+hourly.list[i].weather[0].main+'.png'
-            document.getElementById('time'+i).innerHTML = hourly.list[i].dt_txt
+        for(var i=0;i<7;i++){ 
+            document.getElementById('hourly_icon'+i).src = 'weather_img/'+hourly.list[i].weather[0].main+'.png'
+            document.getElementById('time'+i).innerHTML = (hourly.list[i].dt_txt).substring(11,16)
+            document.getElementById('hourly_temp'+i).innerHTML = Math.round(hourly.list[i].main.temp_max)+'℃'
             }
         });
-
+    

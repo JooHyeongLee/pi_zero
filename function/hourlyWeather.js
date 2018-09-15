@@ -8,13 +8,9 @@ function hourlyWeatherFunction(callback) {
     request(url,function(err,response,body) {
         if(err)
             console.log(err)
-        else{
-            obj = JSON.parse(body);
-            for(var i=0;i<6;i++) {
-                console.log(obj.list[i].weather)
-            }
-        }
-        callback(obj)
-    })
+        else  
+           obj = JSON.parse(body);
+       callback(obj)
+    });
 }
 exports.hourlyWeatherFunction = hourlyWeatherFunction;

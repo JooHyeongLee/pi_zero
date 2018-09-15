@@ -51,7 +51,6 @@ app.get('/forecast',function(req,res){
             res.render('forecast',{data:JSON.stringify(data), hourly:JSON.stringify(hourly)});
         })
    });
-
 });
 app.post('/search_post',function(req,res) {
 	search.searchFunction(req.body.postData)
