@@ -37,11 +37,37 @@ script.
         temp_max.innerHTML = data.temp_max+'℃'
         temp_min.innerHTML = data.temp_min+'℃ /'
 
+        var d = new Date();
+        var hour = d.getHours()
+        var timeFormat = [0,3,6,9,12,15,18,21]
+        var timeArr = []
+        var abs=0
+        var near=0
+        var min = 100
+
+        for(var i=0;i<8;i++) {
+            abs = ( (timeFormat[i] - hour) <0) ? -(timeFormat[i] - hour) : (timeFormat[i]-hour);
+            if(abs < min) {
+                min = abs;
+                near = timeFormat[i];
+            }
+        }
+        for(var i=0;i<7;i++){
+            if(near>=24)
+                near-=24
+            if(near<10)
+                timeArr[i] = near.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
+            else
+                timeArr[i] = near
+            near+=3
+        }
+        alert(timeArr)
+
         var hourly = !{hourly}
         for(var i=0;i<7;i++){ 
             document.getElementById('hourly_icon'+i).src = 'weather_img/'+hourly.list[i].weather[0].main+'.png'
-            document.getElementById('time'+i).innerHTML = (hourly.list[i].dt_txt).substring(11,16)
-            document.getElementById('hourly_temp'+i).innerHTML = Math.round(hourly.list[i].main.temp_max)+'℃'
+            document.getElementById('time'+i).innerHTML = timeArr[i]+':00';
+            document.getElementById('hourly_temp'+i).innerHTML = Math.round(hourly.list[i].main.temp)+'℃'
             }
         });
     

@@ -11,6 +11,7 @@ function hourlyWeatherFunction(callback) {
         else  
            obj = JSON.parse(body);
        callback(obj)
+       console.log(obj.list)
     });
 }
 exports.hourlyWeatherFunction = hourlyWeatherFunction;
