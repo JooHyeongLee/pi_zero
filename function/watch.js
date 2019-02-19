@@ -10,14 +10,11 @@ var response = require('response');
 var myPhoto = require('./myPhoto');
 //이미지 다운로드 메소드
 var download = require('./download');
-//singleton 패턴
-var singleton = require('./singleton');
 //file 개수
 var fileNum = require('./fileNum');
 
 function watchFunction() {
-	var path = './img/';
-	setInterval(function() {
+	var path = "./img/";
 	flickr.people.getPhotos({
 		user_id: '142709372@N03'
 	}).then(function(res){
@@ -47,10 +44,9 @@ function watchFunction() {
 		else{
 			//console.log('local과 flickr 일치함');
 		}
-			});
+	});
 	}).catch(function(err){
 		console.error(err);
 	});
-	},3000);
 }
 exports.watchFunction = watchFunction;

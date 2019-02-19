@@ -1,0 +1,27 @@
+doctype html
+head
+	meta(charset='UTF-8')
+	title
+body
+	h2 이미지 검색어를 입력하세요.
+	input(type="text" id="word")
+	button(type='button' id="btn") 검색
+
+script.
+	const ip = `!{ip}`;
+	btn.addEventListener('click',function(){
+		let data = JSON.stringify({'word':word.value});
+		const xhr = new XMLHttpRequest();
+		xhr.open('POST',`http://${ip}:3000/search_post`,true);
+		xhr.setRequestHeader('Content-type','application/json');
+		xhr.send(data);
+		xhr.addEventListener('load',function(){
+			const result = JSON.parse(xhr.responseText);
+			if(result.tf){
+				alert('완료');
+			}
+			else {
+				alert('error');
+			}
+		});
+	});

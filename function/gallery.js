@@ -5,7 +5,7 @@ var fs = require('fs');
 var response = require('response');
 
 function galleryFunction() {
-	var path = './gallery_img/';
+	var path = '../gallery_img/';
 	flickr.galleries.getPhotos({
 		gallery_id: '72157700635747985'
 	}).then(function(res){

@@ -11,14 +11,13 @@ function timeOperationFunction(time){
 	var minute= time.substring(14,16);
 	var second = time.substring(17,19);
 
-	if(hour =='02') {
+	if(hour =='07') {
 		request(url,function(err,response,body){
 			if(err)
 				console.log(err);
 			else if(flag){
 				flag = false;
 				var obj = JSON.parse(body);
-				console.log('현재 기온: '+obj.main.temp);
 				var run = exec("chromium-browser --app=http://localhost:3000/forecast -start-fullscreen",function(err,stdout,stderr){});
 			}
 		});

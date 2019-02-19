@@ -77,6 +77,18 @@ function weatherFunction(callback) {
                 "temp_max":Math.round(obj.main.temp_max),
                 "temp_min":Math.round(obj.main.temp_min)
                 }
+			else if(obj.weather[0].main == 'Snow')
+                weatherObj = {
+                "img":"weather_img/Snow.png",
+                "temp":Math.round(obj.main.temp), 
+                "status":"눈",
+                "week": todayLabel,
+                "date" : time,
+                "wind" : obj.wind.speed,
+                "humidity" : obj.main.humidity,
+                "temp_max":Math.round(obj.main.temp_max),
+                "temp_min":Math.round(obj.main.temp_min)
+                }
             else{
 				weatherObj = {
                 "img":"weather_img/unknown.png",

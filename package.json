@@ -25,7 +25,7 @@
     "flickr-sdk": "^3.7.0",
     "flickrapi": "^0.6.0",
     "forever": "^0.15.3",
-    "pinterest-api": "^1.1.4",
+    "node-cron": "^2.0.3",
     "pug": "^2.0.3",
     "request": "^2.88.0",
     "response": "^0.18.0",
