@@ -22,7 +22,7 @@
     "date-utils": "^1.2.21",
     "express": "^4.16.3",
     "file-system": "^2.2.2",
-    "flickr-sdk": "^3.7.0",
+    "flickr-sdk": "^6.1.2",
     "flickrapi": "^0.6.0",
     "forever": "^0.15.3",
     "node-cron": "^2.0.3",
